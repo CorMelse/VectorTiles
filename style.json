@@ -1,0 +1,60 @@
+{
+  "version": 8,
+  "name": "Mijn eigen Stijl",
+  "glyphs": "https://geodata.nationaalgeoregister.nl/beta/topotiles-viewer/font/{fontstack}/{range}.pbf",
+  "sources": {
+    "pdok":{
+      "type": "vector",
+      "tiles": ["https://geodata.nationaalgeoregister.nl/beta/topotiles/{z}/{x}/{y}.pbf"]
+    }
+  },
+  "layers":[
+    {
+      "id":  "background",
+      "type": "background",
+      "paint": {
+        "background-color":"#FFFFFF"
+      }
+    },
+    {
+      "id": "admin",
+      "type": "fill",
+      "source": "pdok",
+      "source-layer": "admin",
+      "maxzoom": 22,
+      "minzoom": 0,
+      "filter": ["==", "lod1", "province"],
+      "paint": {
+        "fill-color" :"#eee000",
+        "fill-outline-color": "#000000"
+      }
+    },
+    {
+      "id": "urban_z12-Z20",
+      "type": "fill",
+      "source": "pdok",
+      "source-layer": "urban",
+      "maxzoom": 20,
+      "minzoom": 12,
+      "filter": [">=", "z_index", 0],
+      "paint": {
+          "fill-color" :{
+              "property": "lod1",
+              "type": "categorical",
+              "stops": [
+                  ["urban_area", "#E3DCE7"],
+                  ["buildings", "#000000"]
+              ]
+          },
+          "fill-outline-color": {
+              "property": "lod1",
+              "type": "categorical",
+              "stops": [
+                  ["urban_area", "#c1c1c1"],
+                  ["buildings", "#c1c1c1"]
+              ]
+          }
+      }
+    }
+  ]
+}
